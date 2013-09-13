@@ -1,0 +1,61 @@
+/*
+Theme Name:     SocialBuddy Child Theme
+Theme URI:     http://herothemes.com/
+Description:    Child theme for SocialBuddy
+Author:     Chris Mooney (Swish Themes)
+Author URI:   http://herothemes.com
+Template:       socialbuddy
+Version:        1.0.0
+*/
+
+@import url("../socialbuddy/style.css");
+
+
+/* ------- Insert custom styles below this line ------- */
+
+
+#logo {
+   margin-top: -20px;
+}
+
+#logo a img {
+    height: 70px;
+}
+
+#home-blocks a {
+  color: inherit;
+}
+
+#home-blocks a:hover h3 {
+  text-decoration: underline;
+}
+
+#home-blocks a:hover .block-wrap {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  opacity: 0.8;
+}
+
+#home-blocks a:hover img {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  opacity: 0.8;
+}
+
+#forum-front #bbpress-forums .bbp-forum-info {
+  width: 100%;
+}
+
+#forum-front #bbpress-forums ul.bbp-has-subforums .bbp-forum-header {
+  margin-bottom: 15px;
+}
+
+#forum-front .bbp-forum-content {
+  line-height: 110%;
+  margin-top: 10px;
+}
+
+#forum-front #bbpress-forums ul.bbp-has-subforums,
+#forum-front #bbpress-forums ul.bbp-has-subforums ul {
+  border: 0;
+}
