@@ -9,8 +9,7 @@ Version:        1.0.0
 
 @import url("../socialbuddy/style.css");
 
-
-/* ------- Insert custom styles below this line ------- */
+/* ------- Header ------- */
 
 
 #logo {
@@ -20,6 +19,8 @@ Version:        1.0.0
 #logo a img {
     height: 70px;
 }
+
+/* ------- Home Page ------- */
 
 #home-blocks a {
   color: inherit;
@@ -41,6 +42,8 @@ Version:        1.0.0
   opacity: 0.8;
 }
 
+/* ------- Forum ------- */
+
 #forum-front #bbpress-forums .bbp-forum-info {
   width: 100%;
 }
@@ -59,6 +62,8 @@ Version:        1.0.0
   border: 0;
 }
 
+/* ------- Widgets ------- */
+
 .widget_recent_entries li a:hover, 
 .widget_meta li a:hover, 
 .widget_nav_menu li a:hover, 
@@ -74,6 +79,8 @@ Version:        1.0.0
    color: black;
 }
 
+/* ------- Groups Menu ------- */
+
 #item-nav .item-list-tabs ul li a, 
 #item-nav .item-list-tabs ul li>span {
    padding: 22px 10px 20px;
@@ -84,6 +91,16 @@ Version:        1.0.0
    padding-left: 10px;
 }
 
+/* ------- Unsure ------- */
+
 .lcp_catlist span {
    display: block;
+}
+
+/* ------- FAQ ------- */
+
+.qa-faq-anchor {
+	font-size: 18px;
+	line-height: 1em;
+	padding: 0;
 }
