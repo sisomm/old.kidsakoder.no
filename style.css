@@ -58,3 +58,32 @@ Version:        1.0.0
 #forum-front #bbpress-forums ul.bbp-has-subforums ul {
   border: 0;
 }
+
+.widget_recent_entries li a:hover, 
+.widget_meta li a:hover, 
+.widget_nav_menu li a:hover, 
+.widget_pages li a:hover, 
+.widget_categories li a:hover, 
+.widget_archive li a:hover {
+  color: black;
+}
+
+.widget_display_forums li a:hover, 
+.widget_display_topics li a:hover, 
+.widget_display_replies li a:hover {
+   color: black;
+}
+
+#item-nav .item-list-tabs ul li a, 
+#item-nav .item-list-tabs ul li>span {
+   padding: 22px 10px 20px;
+}
+
+#item-nav .item-list-tabs ul li:first-child a,
+#item-nav .item-list-tabs ul li:first-child>span {
+   padding-left: 10px;
+}
+
+.lcp_catlist span {
+   display: block;
+}
