@@ -130,14 +130,14 @@ add_action( 'init', 'custom_taxonomy', 0 );
  * Adds Foo_Widget widget.
  */
  
-class Group_Posts_Widget extends WP_Widget {
+class LKK_Group_Posts_Widget extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress.
 	 */
 	function __construct() {
 		parent::__construct(
-			'foo_widget', // Base ID
+			'lkk_group_posts_widget', // Base ID
 			__('(LKK) Group Posts', 'lkk'), // Name
 			array( 'description' => __( 'Pulls blogpost from same location as group', 'lkk' ), ) // Args
 		);
@@ -159,8 +159,6 @@ class Group_Posts_Widget extends WP_Widget {
 		$group_location = str_replace('kodeklubben-', '', $group_location);
 		
 		$group_location_name = get_term_by( 'slug', $group_location, 'lkk_location', 'ARRAY_A' )['name'];
-		
-		echo $group_location_name;
     
     if($group_location_name) {
   
@@ -226,9 +224,7 @@ class Group_Posts_Widget extends WP_Widget {
 } // class Group_Posts_Widget
 
 // register Foo_Widget widget
-function register_group_posts_widget() {
-    register_widget( 'Group_Posts_Widget' );
+function register_lkk_group_posts_widget() {
+    register_widget( 'LKK_Group_Posts_Widget' );
 }
-add_action( 'widgets_init', 'register_group_posts_widget' );
- 
- 
+add_action( 'widgets_init', 'register_lkk_group_posts_widget' );
