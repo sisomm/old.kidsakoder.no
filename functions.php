@@ -115,10 +115,10 @@ function custom_taxonomy()  {
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
-		'query_var'                  => 'location',
+		'query_var'                  => 'lkk_location',
 		'rewrite'                    => $rewrite,
 	);
-	register_taxonomy( 'location', 'post', $args );
+	register_taxonomy( 'lkk_location', 'post', $args );
 
 }
 
@@ -158,7 +158,9 @@ class Group_Posts_Widget extends WP_Widget {
 		$group_location = array_pop(explode('/', $group_slug));
 		$group_location = str_replace('kodeklubben-', '', $group_location);
 		
-		$group_location_name = get_term_by( 'slug', $group_location, 'location', 'ARRAY_A' )['name'];
+		$group_location_name = get_term_by( 'slug', $group_location, 'lkk_location', 'ARRAY_A' )['name'];
+		
+		echo $group_location_name;
     
     if($group_location_name) {
   
@@ -168,7 +170,7 @@ class Group_Posts_Widget extends WP_Widget {
       
       echo $args['before_title'] . $title . $args['after_title'];
   		
-      $args = array( 'location' => $group_location, 'posts_per_page' => 5 );
+      $args = array( 'lkk_location' => $group_location, 'posts_per_page' => 5 );
       $location_posts = new WP_Query($args);
       
       if($location_posts->have_posts()) {
@@ -192,7 +194,7 @@ class Group_Posts_Widget extends WP_Widget {
           </ul>
           
           <p>
-            <a href="<?php echo get_term_link($group_location, 'location') ?>"><?php _e('View all posts from', 'lkk')?> <?php echo $group_location_name ?></a>
+            <a href="<?php echo get_term_link($group_location, 'lkk_location') ?>"><?php _e('View all posts from', 'lkk')?> <?php echo $group_location_name ?></a>
           </p>
         
         <?php        
