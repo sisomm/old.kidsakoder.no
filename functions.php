@@ -5,7 +5,7 @@
  *
  */
 
-define( 'ACF_LITE', true );
+/* define( 'ACF_LITE', true ); */
 include_once('advanced-custom-fields/acf.php');
 
 /**
@@ -77,3 +77,156 @@ include_once('advanced-custom-fields/acf.php');
       'menu_order' => 0,
     ));
   }
+  
+  
+/**
+ *  Register Custom taxonomy
+ *
+ */
+ 
+function custom_taxonomy()  {
+
+	$labels = array(
+		'name'                       => _x( 'Locations', 'Taxonomy General Name', 'lkk' ),
+		'singular_name'              => _x( 'Location', 'Taxonomy Singular Name', 'lkk' ),
+		'menu_name'                  => __( 'Locations', 'lkk' ),
+		'all_items'                  => __( 'All Locations', 'lkk' ),
+		'parent_item'                => __( 'Parent Location', 'lkk' ),
+		'parent_item_colon'          => __( 'Parent Location:', 'lkk' ),
+		'new_item_name'              => __( 'New Location', 'lkk' ),
+		'add_new_item'               => __( 'Add New Location', 'lkk' ),
+		'edit_item'                  => __( 'Edit Location', 'lkk' ),
+		'update_item'                => __( 'Update Location', 'lkk' ),
+		'separate_items_with_commas' => __( 'Separate locations with commas', 'lkk' ),
+		'search_items'               => __( 'Search locations', 'lkk' ),
+		'add_or_remove_items'        => __( 'Add or remove locations', 'lkk' ),
+		'choose_from_most_used'      => __( 'Choose from the most used locations', 'lkk' ),
+	);
+	$rewrite = array(
+		'slug'                       => 'location',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => true,
+		'show_in_nav_menus'          => true,
+		'show_tagcloud'              => true,
+		'query_var'                  => 'location',
+		'rewrite'                    => $rewrite,
+	);
+	register_taxonomy( 'location', 'post', $args );
+
+}
+
+// Hook into the 'init' action
+add_action( 'init', 'custom_taxonomy', 0 );
+
+
+/**
+ * Adds Foo_Widget widget.
+ */
+ 
+class Group_Posts_Widget extends WP_Widget {
+
+	/**
+	 * Register widget with WordPress.
+	 */
+	function __construct() {
+		parent::__construct(
+			'foo_widget', // Base ID
+			__('(LKK) Group Posts', 'lkk'), // Name
+			array( 'description' => __( 'Pulls blogpost from same location as group', 'lkk' ), ) // Args
+		);
+	}
+
+	/**
+	 * Front-end display of widget.
+	 *
+	 * @see WP_Widget::widget()
+	 *
+	 * @param array $args     Widget arguments.
+	 * @param array $instance Saved values from  database.
+	 */
+	 
+	public function widget( $args, $instance ) {		
+		
+		$group_slug = bp_get_current_group_slug();
+		$group_location = array_pop(explode('/', $group_slug));
+		$group_location = str_replace('kodeklubben-', '', $group_location);
+		
+		$group_location_name = get_term_by( 'slug', $group_location, 'location', 'ARRAY_A' )['name'];
+    
+    if($group_location_name) {
+  
+  		$title = __('News from ', 'lkk').' '.$group_location_name;
+  		
+      echo $args['before_widget'];
+      
+      echo $args['before_title'] . $title . $args['after_title'];
+  		
+      $args = array( 'location' => $group_location, 'posts_per_page' => 5 );
+      $location_posts = new WP_Query($args);
+      
+      if($location_posts->have_posts()) {
+           
+        ?>
+        
+          <ul>
+        
+        <?php        
+        
+        while($location_posts->have_posts()) : 
+          $location_posts->the_post();   
+          
+        ?>
+          <li><a href="<?php the_permalink() ?>"><?php the_title() ?></a></li>
+        <?php        
+        
+        endwhile;
+        
+        ?>
+          </ul>
+          
+          <p>
+            <a href="<?php echo get_term_link($group_location, 'location') ?>"><?php _e('View all posts from', 'lkk')?> <?php echo $group_location_name ?></a>
+          </p>
+        
+        <?php        
+        
+      } else {
+          _e('No news from', lkk); echo ' '.$group_location_name.'.';
+      }
+      
+      echo $args['after_widget'];
+    }
+	}
+
+	/**
+	 * Back-end widget form.
+	 *
+	 * @see WP_Widget::form()
+	 *
+	 * @param array $instance Previously saved values from database.
+	 */
+	public function form( $instance ) {
+
+    ?>
+		<p>
+      <?php _e('This widget will create a list of posts from the same location as the group, if possible.', 'lkk')?>
+		</p>
+		<?php 
+	}
+
+} // class Group_Posts_Widget
+
+// register Foo_Widget widget
+function register_group_posts_widget() {
+    register_widget( 'Group_Posts_Widget' );
+}
+add_action( 'widgets_init', 'register_group_posts_widget' );
+ 
+ 
