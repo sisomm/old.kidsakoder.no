@@ -154,9 +154,9 @@ class LKK_Group_Posts_Widget extends WP_Widget {
 	 
 	public function widget( $args, $instance ) {		
 		
-		$group_slug = bp_get_current_group_slug();
-		$group_location = array_pop(explode('/', $group_slug));
-		$group_location = str_replace('kodeklubben-', '', $group_location);
+		$group_slug_with_hirarchy = bp_get_current_group_slug();
+		$group_slug = array_pop(explode('/', $group_slug_with_hirarchy));
+		$group_location = str_replace('kodeklubben-', '', $group_slug);
 		
 		$group_location_name = get_term_by( 'slug', $group_location, 'lkk_location', 'ARRAY_A' )['name'];
     
@@ -203,6 +203,7 @@ class LKK_Group_Posts_Widget extends WP_Widget {
       
       echo $args['after_widget'];
     }
+    
 	}
 
 	/**
