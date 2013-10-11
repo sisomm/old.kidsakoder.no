@@ -194,12 +194,17 @@ class LKK_Group_Posts_Widget extends WP_Widget {
           <p>
             <a href="<?php echo get_term_link($group_location, 'lkk_location') ?>"><?php _e('View all posts from', 'lkk')?> <?php echo $group_location_name ?></a>
           </p>
+          <p>
         
-        <?php        
+        <?php _e(sprintf('Add more news by adding a post with location <strong>%s</strong>.', $group_location_name), lkk);  ?>
+        
+        </p>
+        
+      <?php
         
       } else {
           
-          _e(sprintf('Add news by writing a post with location set to <strong>%s</strong>', $group_location_name), lkk);
+          _e(sprintf('Add news by writing a post with location set to <strong>%s</strong>.', $group_location_name), lkk);
       }
       
       echo $args['after_widget'];
