@@ -198,7 +198,8 @@ class LKK_Group_Posts_Widget extends WP_Widget {
         <?php        
         
       } else {
-          _e('No news from', lkk); echo ' '.$group_location_name.'.';
+          
+          _e(sprintf('Add news by writing a post with location set to <strong>%s</strong>', $group_location_name), lkk);
       }
       
       echo $args['after_widget'];
