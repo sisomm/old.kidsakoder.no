@@ -158,7 +158,7 @@ class LKK_Group_Posts_Widget extends WP_Widget {
 		$group_slug = array_pop(explode('/', $group_slug_with_hirarchy));
 		$group_location = str_replace('kodeklubben-', '', $group_slug);
 		
-		$group_location_name = get_term_by( 'slug', $group_location, 'lkk_location', 'ARRAY_A' )['name'];
+		$group_location_name = get_term_by( 'slug', $group_location, 'lkk_location')->name;
     
     if($group_location_name) {
   
