@@ -34,3 +34,5 @@ require_once('lkk-custom-fields/lkk-hompage-block-fields.php');
 require_once("lkk-location/lkk-location-taxonomy.php");
 require_once("lkk-location/lkk-location-widgets.php");
 require_once("lkk-codeclub/lkk-codeclub-widgets.php");
+
+remove_action( 'wp_head', 'jetpack_og_tags' );
