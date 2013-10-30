@@ -9,7 +9,7 @@ Template Name: Home
 <div id="feature-blocks">
 <div class="container sidebar-off clearfix"> 
   <!-- #content -->
-  <div id="content" role="main">
+  <div id="content">
 
 <?php get_template_part( 'hp', 'feature-blocks' ); ?>
 
@@ -18,8 +18,11 @@ Template Name: Home
 </div>
 
 <!-- #hpslider -->
-<div id="hpslider" class="flexslider">
+<div id="slidecallout">
 <div class="container">
+
+<div class="row half-gutter stacked">
+<div class="column col-half">
 <?php	$args = array(
 		'post_type' => 'st_hpslider',
 		'posts_per_page' => '-1',
@@ -31,10 +34,11 @@ Template Name: Home
 	if($wp_query->have_posts()) : ?>
 	
 <?php st_hpslider(); ?>
+<div id="hpslider" class="flexslider">
     <ul class="slides">    
    <?php while($wp_query->have_posts()) : $wp_query->the_post(); ?>
 
-<li>
+   <li>
      <?php if (get_post_meta(get_the_ID(), 'st_hpslider_link', true) ) { ?><a href="<?php echo get_post_meta(get_the_ID(), 'st_hpslider_link', true) ?>"><?php } ?>
      
       <?php the_post_thumbnail('slider'); ?>
@@ -59,9 +63,15 @@ Template Name: Home
        </li>
               
 <?php endwhile; ?>
-</ul>
+  </ul>
+</div>
 <!-- /#hpslider -->
 <?php endif; wp_reset_postdata(); ?>
+</div><!-- /.col-half -->
+<div class="column col-half">
+  <?php get_template_part( 'hp', 'callout' ); ?>
+</div>
+</div><!-- /.row -->
 </div>
 </div>
 
@@ -73,8 +83,6 @@ Template Name: Home
 <div id="primary" class="container sidebar-off clearfix"> 
   <!-- #content -->
   <div id="content" role="main">
- 
-<?php get_template_part( 'hp', 'callout' ); ?>	
 
 <?php get_template_part( 'hp', 'widget-block' ); ?>
 
