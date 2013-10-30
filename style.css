@@ -116,6 +116,10 @@ Version:        1.0.0
 
 /* ------- Widgets ------- */
 
+.bbp_widget_login .logout-link {
+  color: #737980;
+}
+
 .widget_recent_entries li a:hover, 
 .widget_meta li a:hover, 
 .widget_nav_menu li a:hover, 
