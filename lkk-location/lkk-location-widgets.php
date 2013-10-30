@@ -30,11 +30,14 @@ class LKK_Group_Posts_Widget extends WP_Widget {
 		
 		$group_slug_with_hirarchy = bp_get_current_group_slug();
 		$group_slug = array_pop(explode('/', $group_slug_with_hirarchy));
-		$group_location = str_replace('kodeklubben-', '', $group_slug);
+		$group_slug = str_replace('kodeklubben-', '', $group_slug);
 		
-		$group_location_name = get_term_by( 'slug', $group_location, 'lkk_location')->name;
+		$group_location_name = get_term_by( 'slug', $group_slug, 'lkk_location')->name;
     
     if($group_location_name) {
+      
+      //Found location matching slug.
+      $group_location = $group_slug;
   
   		$title = __('News from ', 'lkk').' '.$group_location_name;
   		
@@ -42,7 +45,7 @@ class LKK_Group_Posts_Widget extends WP_Widget {
       
       echo $args['before_title'] . $title . $args['after_title'];
   		
-      $loction_args = array( 'lkk_location' => $group_location, 'posts_per_page' => 5 );
+      $loction_args = array( 'lkk_location' => $group_slug, 'posts_per_page' => 5 );
       $location_posts = new WP_Query($loction_args);
       
       if($location_posts->have_posts()) {
@@ -82,6 +85,60 @@ class LKK_Group_Posts_Widget extends WP_Widget {
       }
       
       echo $args['after_widget'];
+      
+    } else if ($group_slug) {
+    
+      //Find post tagget with group slug 
+  
+  		$title = __('Group news  ', 'lkk');
+  		
+      echo $args['before_widget'];
+      
+      echo $args['before_title'] . $title . $args['after_title'];
+  		
+      $tag_args = array( 'tag' => $group_slug, 'posts_per_page' => 5 );
+      $tag_posts = new WP_Query($tag_args);
+      
+      if($tag_posts->have_posts()) {
+           
+        ?>
+        
+          <ul>
+        
+        <?php        
+        
+        while($tag_posts->have_posts()) : 
+          $tag_posts->the_post();   
+          
+        ?>
+          <li><a href="<?php the_permalink() ?>"><?php the_title() ?></a></li>
+        <?php        
+        
+        endwhile;
+        
+        ?>
+          </ul>
+          
+          <p>
+            <a href="<?php echo get_tag_link($group_slug) ?>"><?php _e('View all group posts', 'lkk')?></a>
+          </p>
+          <p>
+        
+        <?php _e(sprintf('Add more news by adding a post with tag <strong>%s</strong>.', $group_slug), lkk);  ?>
+        
+        </p>
+        
+      <?php
+        
+      } else {
+          
+          _e(sprintf('Add news by writing a post with tag <strong>%s</strong>.', $group_slug), lkk);
+          echo '<br/><br/>';
+          _e(sprintf('If this is a group with a location add <strong>%s</strong> to locations and use location instead.', $group_slug), lkk);
+      }
+      
+      echo $args['after_widget'];
+
     }
     
 	}
