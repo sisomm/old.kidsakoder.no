@@ -22,6 +22,58 @@ Version:        1.0.0
 
 /* ------- Home Page ------- */
 
+#feature-blocks {
+  background-color: #242E33;
+}
+
+#feature-blocks .sidebar-off #content {
+  width: 100%;
+  float: none;
+  margin: 0;
+  border: none;
+}
+
+#slidecallout {
+  background-color: #242E33;
+}
+
+#slidecallout .container {
+  background-color: white; 
+}
+
+#slidecallout #hpslider {
+  background-color: #e2e2e2; 
+}
+
+#callout {
+  border: none;
+  margin: 0;
+  padding: 0;
+  margin-right: 4.4%;
+}
+
+#callout .callout-left,
+#callout .callout-right {
+  float: none;
+  width: 100%;
+}
+
+#callout .callout-right .btn{
+  float: right;
+}
+
+#slidecallout .column {
+  margin-bottom: 0;
+}
+
+#hpslider .slides {
+  min-height: 245px;
+}
+
+#home-blocks {
+  margin-bottom: -30px;
+}
+
 #home-blocks a {
   color: inherit;
 }
@@ -63,6 +115,10 @@ Version:        1.0.0
 }
 
 /* ------- Widgets ------- */
+
+.bbp_widget_login .logout-link {
+  color: #737980;
+}
 
 .widget_recent_entries li a:hover, 
 .widget_meta li a:hover, 
